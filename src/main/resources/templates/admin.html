@@ -15,26 +15,30 @@
 
         }
 
+        .wrap-for-logout{
+            text-align: center;
+            padding-bottom: 1rem;
+        }
+
+        td{
+            border-left: 1px solid black;
+        }
+
+        tbody > tr td:last-child{
+            width: 1.6rem;
+            text-align: center;
+        }
+
+        .delete-user-btn{
+            cursor: pointer;
+        }
+
     </style>
 </head>
 <body>
 
 <main>
-
-    <table class="table table-hover">
-        <thead>
-        <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Login</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="user : ${users}">
-            <th scope="row" th:text="${user.id}"></th>
-            <td th:text="${user.login}"></td>
-        </tr>
-        </tbody>
-    </table>
+<div class="wrap-for-logout">
 
     <a class="login_out" href="/logout">
         <button type="submit" class="btn btn-outline-dark btn_login_out">
@@ -42,7 +46,29 @@
         </button>
     </a>
 
+</div>
+
+
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Login</th>
+            <th scope="col">Delete user</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <th scope="row" th:text="${user.id}"></th>
+            <td th:text="${user.login}"></td>
+            <td class="delete-user-btn" th:data-id="${user.id}">&#10007;</td>
+        </tr>
+        </tbody>
+    </table>
+
 </main>
+
+<script th:src="@{/js/admin.js}"></script>
 
 </body>
 </html>

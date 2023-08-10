@@ -7,6 +7,7 @@ import com.example.diplomaproject.entity.WalletTransaction;
 import com.example.diplomaproject.services.CustomUserService;
 import com.example.diplomaproject.services.WalletService;
 import com.example.diplomaproject.services.WalletTransitionService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
@@ -91,6 +92,14 @@ public class MainController {
         model.addAttribute("main_walletCurrency", mainWallet.getCurrency());
 
         return "privateOffice";
+    }
+
+    @PostMapping("/delete_user")
+    private ResponseEntity<String> deleteUser(@RequestParam("userId") Long id){
+        CustomUser customUser = userService.findCustomUserById(id);
+        userService.deleteUser(customUser);
+
+        return ResponseEntity.ok().body("User" + customUser.getLogin() + "was deleted.");
     }
 
 

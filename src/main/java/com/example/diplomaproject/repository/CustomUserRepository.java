@@ -13,6 +13,9 @@ public interface CustomUserRepository extends JpaRepository<CustomUser, Long> {
     @Query("SELECT c FROM CustomUser c WHERE c.login = :login")
     CustomUser findByLogin(@Param("login") String login);
 
+    @Query("SELECT c FROM CustomUser c WHERE c.id = :id")
+    CustomUser findCustomUserById(@Param("id") Long id);
+
     @Query("SELECT c FROM CustomUser c WHERE c.role = 'User'")
     List<CustomUser> findAllUsers();
 

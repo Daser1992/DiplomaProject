@@ -54,6 +54,12 @@ public class CustomUserService {
     }
 
     @Transactional
+    public CustomUser findCustomUserById(Long id){
+
+        return customUserRepository.findCustomUserById(id);
+    }
+
+    @Transactional
     public List<CustomUser> findAllUsers(){
        List<CustomUser> customUserList = customUserRepository.findAllUsers();
        return customUserList;
@@ -64,6 +70,10 @@ public class CustomUserService {
         CustomUser customUser = customUserRepository.findByLogin(login);
 
         return customUser;
+    }
+
+    public void deleteUser(CustomUser user){
+        customUserRepository.delete(user);
     }
 
 }
