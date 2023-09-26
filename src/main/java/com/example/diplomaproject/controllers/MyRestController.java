@@ -41,7 +41,6 @@ public class MyRestController {
         walletService.save(wallet);
         userService.updateUser(customUser);
 
-        System.out.println(walletDTO);
         return walletDTO.getName();
     }
 
@@ -54,8 +53,6 @@ public class MyRestController {
         CustomUser customUser = userService.findUserByLogin(getCurrentUser().getUsername());
         Wallet userWallet = customUser.getWallet(walletTransactionDTO.getWalletName());
         if (userWallet == null) {
-            System.out.println("NO");
-            System.out.println(walletTransactionDTO);
             return null;
         }
         String formattedSum = String.format("%.2f", walletTransactionDTO.getSum());
@@ -95,7 +92,6 @@ public class MyRestController {
     private WalletDTO getWallet(@RequestParam("walletName") String walletName) {
         CustomUser customUser = userService.findUserByLogin(getCurrentUser().getUsername());
         Wallet wallet = customUser.getWallet(walletName);
-//        List<WalletTransaction> walletTransactions = walletTransitionService.findWalletTransactionsByWallet(wallet);
 
         return new WalletDTO(wallet.getName(), wallet.getSum(), wallet.getCurrency());
     }
@@ -123,7 +119,6 @@ public class MyRestController {
         CustomUser customUser = userService.findUserByLogin(getCurrentUser().getUsername());
         Wallet wallet = customUser.getWallet(walletName);
         List<WalletTransaction> listOfWT = wallet.getWalletTransactions();
-//        List<WalletTransaction> listOfWT = walletTransitionService.findWalletTransactionsByWallet(wallet);
 
         Map<String, Double> map = new HashMap<>();
         for (WalletTransaction wt : listOfWT) {

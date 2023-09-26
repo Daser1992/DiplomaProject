@@ -61,15 +61,14 @@ public class CustomUserService {
 
     @Transactional
     public List<CustomUser> findAllUsers(){
-       List<CustomUser> customUserList = customUserRepository.findAllUsers();
-       return customUserList;
+
+       return customUserRepository.findAllUsers();
     }
 
     @Transactional(readOnly = true)
     public CustomUser findUserByLogin(String login) {
-        CustomUser customUser = customUserRepository.findByLogin(login);
 
-        return customUser;
+        return customUserRepository.findByLogin(login);
     }
 
     public void deleteUser(CustomUser user){

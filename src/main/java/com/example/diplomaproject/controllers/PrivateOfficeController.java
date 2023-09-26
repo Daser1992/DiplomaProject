@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @AllArgsConstructor
@@ -116,8 +117,8 @@ public class PrivateOfficeController {
     public void removePurpose(@RequestParam("purpose") String purposeName){
         CustomUser customUser = userService.findUserByLogin(getCurrentUser().getUsername());
 
-        List<String> list = customUser.getListPurposes();
-        list.remove(purposeName);
+        Set<String> setPurposes = customUser.getSetPurposes();
+        setPurposes.remove(purposeName);
 
         userService.updateUser(customUser);
 

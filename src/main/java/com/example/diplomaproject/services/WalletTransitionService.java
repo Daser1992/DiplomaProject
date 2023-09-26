@@ -14,47 +14,46 @@ import java.util.List;
 @Service
 public class WalletTransitionService {
 
-    private final WalletTransactionRepository WTRepository;
+    private final WalletTransactionRepository walletTransactionRepository;
 
-    public WalletTransitionService(WalletTransactionRepository WTRepository) {
-        this.WTRepository = WTRepository;
+    public WalletTransitionService(WalletTransactionRepository walletTransactionRepository) {
+        this.walletTransactionRepository = walletTransactionRepository;
     }
 
     @Transactional
     public void save(WalletTransaction walletTransaction){
-        WTRepository.save(walletTransaction);
+        walletTransactionRepository.save(walletTransaction);
     }
 
     @Transactional(readOnly = true)
     public List<WalletTransaction> findWalletTransactionsByWalletId(Long walletId, int page, int number){
         PageRequest pageRequest = PageRequest.of(page, number, Sort.by("id").descending());
-        List<WalletTransaction> listOfLastTransactions = WTRepository.findWalletTransactionsByWalletId(walletId, pageRequest);
-        return listOfLastTransactions;
+        return walletTransactionRepository.findWalletTransactionsByWalletId(walletId, pageRequest);
     }
 
     @Transactional(readOnly = true)
     public List<WalletTransaction> findWalletTransactionsByWallet(Wallet wallet){
-        List<WalletTransaction> walletTransactions = WTRepository.findWalletTransactionByWallet(wallet);
 
-        return  walletTransactions;
+
+        return walletTransactionRepository.findWalletTransactionByWallet(wallet);
     }
 
     @Transactional
     public void deleteWalletTransactionsByWalletId(Long id){
-        WTRepository.deleteWalletTransactionByWalletId(id);
+        walletTransactionRepository.deleteWalletTransactionByWalletId(id);
     }
 
     @Transactional
     public boolean delete(WalletTransaction wt){
-        WTRepository.delete(wt);
+        walletTransactionRepository.delete(wt);
         return true;
     }
 
 
     @Transactional
     public WalletTransaction findWalletTransactionById(Long id){
-       WalletTransaction wt = WTRepository.findWalletTransactionById(id);
-       return wt;
+
+       return walletTransactionRepository.findWalletTransactionById(id);
     }
 
 }

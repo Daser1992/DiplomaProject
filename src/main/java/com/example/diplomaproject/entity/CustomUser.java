@@ -7,7 +7,9 @@ import lombok.NoArgsConstructor;
 
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -29,12 +31,12 @@ public class CustomUser {
     @OneToMany(mappedBy = "customUser", cascade = CascadeType.ALL)
     private List<Wallet> listWallets = new ArrayList<>();
     @ElementCollection
-    private List<String> listPurposes = new ArrayList<>();
+    private Set<String> setPurposes = new HashSet<>();
 
     public boolean addNewPurpose(String... purposes){
         for (String purpose: purposes) {
-            if (!listPurposes.contains(purpose)){
-                listPurposes.add(purpose);
+            if (!setPurposes.contains(purpose)){
+                setPurposes.add(purpose);
             }else return false;
 
         }
@@ -52,9 +54,6 @@ public class CustomUser {
         if (count > 0){
             return false;
         }else listWallets.add(wallet);
-//        if (!listWallets.contains(wallet)) {
-//            listWallets.add(wallet);
-//        }
         return true;
     }
 

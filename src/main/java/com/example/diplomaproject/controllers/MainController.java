@@ -48,7 +48,7 @@ public class MainController {
         model.addAttribute("currency", wallet.getCurrency());
         model.addAttribute("transactions", listOfWT);
         model.addAttribute("listOfWallet", customUser.getListWallets());
-        model.addAttribute("purposes", customUser.getListPurposes());
+        model.addAttribute("purposes", customUser.getSetPurposes());
         model.addAttribute("currentWallet", walletName);
 
         return "index";
@@ -82,11 +82,9 @@ public class MainController {
         formatForMainWallet = formatForMainWallet.replace(",", ".");
         List<Wallet> walletList = customUser.getListWallets();
 
-
-
         model.addAttribute("user_wallets", walletList);
         model.addAttribute("userLogin", customUser.getLogin());
-        model.addAttribute("purposes", customUser.getListPurposes());
+        model.addAttribute("purposes", customUser.getSetPurposes());
         model.addAttribute("main_wallet", mainWallet.getName());
         model.addAttribute("main_walletSum", formatForMainWallet);
         model.addAttribute("main_walletCurrency", mainWallet.getCurrency());
